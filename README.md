@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-#🔧Project inprogress🔧
+# 🔧Project inprogress🔧
 
 ## Awesome Tweets
 **Project Description:**<br>
