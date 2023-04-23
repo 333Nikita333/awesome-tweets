@@ -1,11 +1,15 @@
-import TweetsList from 'components/TweetsList';
 import { useEffect, useState } from 'react';
 import { saveToStorage } from 'services/storage';
 import { fetchTweets, updateFollowers } from 'services/tweetsAPI';
+import BackLink from 'components/BackLink';
+import TweetsList from 'components/TweetsList';
+import ButtonLoadMore from 'components/ButtonLoadMore';
+import Loader from 'components/Loader';
 
 const Tweets = () => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [numberVisibleUsers, setNumberVisibleUsers] = useState(3);
 
   useEffect(() => {
     setIsLoading(true);
@@ -36,10 +40,22 @@ const Tweets = () => {
     saveToStorage(keyStorage, isFollowing ? false : true);
   };
 
+  const onBtnLoadMore = () => {
+    setNumberVisibleUsers(prevVisibleUsers => prevVisibleUsers + 3);
+  };
+
+  const isBtnLoadMoreVisible = numberVisibleUsers < users.length;
+  const displayedUsers = users.slice(0, numberVisibleUsers);
+
   return isLoading ? (
-    <b>Loading...</b>
+    <Loader />
   ) : (
-    <TweetsList users={users} onFollowClick={handleFollowClick} />
+    <>
+      {' '}
+      <BackLink to='/'>Go back</BackLink>
+      <TweetsList users={displayedUsers} onFollowClick={handleFollowClick} />
+      {isBtnLoadMoreVisible && <ButtonLoadMore onBtnLoadMore={onBtnLoadMore} />}
+    </>
   );
 };
 

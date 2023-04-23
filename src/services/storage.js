@@ -15,11 +15,3 @@ export const loadFromStorage = key => {
     console.error('Get state error: ', error.message);
   }
 };
-
-export const deleteFromStorage = key => {
-  try {
-    localStorage.removeItem(key);
-  } catch (error) {
-    console.error('Delete state error: ', error.message);
-  }
-};
