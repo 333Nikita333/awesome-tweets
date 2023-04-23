@@ -8,7 +8,7 @@ The goal of the project is to create tweet cards and add interactivity at the cl
 
 ### Installation
 1. Clone the repository: 
-```json
+```jsx
 git clone https://github.com/333Nikita333/awesome-tweets.git
 ```
 
