@@ -3,7 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Awesome Tweets
-**Project Description**
+**Project Description**<br>
 The goal of the project is to create tweet cards and add interactivity at the click of a button.
 
 ### Installation
