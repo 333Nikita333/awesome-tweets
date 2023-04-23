@@ -1,3 +1,4 @@
+import { loadFromStorage } from 'services/storage';
 import {
   Avatar,
   AvatarBox,
@@ -8,18 +9,13 @@ import {
   UserInfoBox,
 } from './TweetCard.styled';
 
-const TweetCard = ({
-  avatar,
-  tweets,
-  followers,
-  isFollowing,
-  onFollowClick,
-}) => {
-  const buttonStyle = {
-    backgroundColor: isFollowing ? '#5CD3A8' : '#EBD8FF',
+const TweetCard = ({ id, avatar, tweets, followers, onFollowClick }) => {
+  const isFollowing = loadFromStorage(`tweets_${id}`) === true;
+
+  const handleFollowClick = () => {
+    onFollowClick(id, isFollowing);
   };
 
-  const buttonText = isFollowing ? 'Following' : 'Follow';
   // const buttonColor = isFollowed ? '#5CD3A8' : '#EBD8FF';
   // const buttonText = isFollowed ? 'Following' : 'Follow';
 
@@ -32,8 +28,12 @@ const TweetCard = ({
         <TweetsNumber>{tweets} tweets</TweetsNumber>
         <FollowersNumber>{followers} Followers</FollowersNumber>
       </UserInfoBox>
-      <Button type='button' onClick={onFollowClick} style={buttonStyle}>
-        {buttonText}
+      <Button
+        type='button'
+        onClick={handleFollowClick}
+        style={{ backgroundColor: isFollowing ? '#5CD3A8' : '#EBD8FF' }}
+      >
+        {isFollowing ? 'Following' : 'Follow'}
       </Button>
     </Card>
   );

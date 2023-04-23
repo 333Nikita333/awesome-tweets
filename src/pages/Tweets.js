@@ -1,5 +1,6 @@
 import TweetsList from 'components/TweetsList';
 import { useEffect, useState } from 'react';
+import { saveToStorage } from 'services/storage';
 import { fetchTweets, updateFollowers } from 'services/tweetsAPI';
 
 const Tweets = () => {
@@ -17,25 +18,22 @@ const Tweets = () => {
       .catch(error => console.log('error', error.message));
   }, []);
 
-  // обработчик события клика на кнопке follow
-  const handleFollowClick = async (id, isFollowing) => {
-    // создаем новый массив пользователей, чтобы не изменять стейт напрямую
-    const updatedUsers = [...users];
-    const userIndex = updatedUsers.findIndex(user => user.id === id);
-    const user = updatedUsers[userIndex];
-    // обновляем состояние пользователя и отправляем изменения на сервер
-    if (isFollowing) {
-      user.followers--;
-      await updateFollowers(id, { followers: user.followers });
-    } else {
-      user.followers++;
-      await updateFollowers(id, { followers: user.followers });
-    }
-    user.isFollowing = !isFollowing;
-    updatedUsers[userIndex] = user;
-
-    // обновляем стейт
+  const handleFollowClick = (userId, isFollowing) => {
+    const updatedUsers = users.map(user => {
+      if (user.id === userId) {
+        const updatedUser = {
+          ...user,
+          followers: user.followers + (isFollowing ? -1 : 1),
+        };
+        updateFollowers(user.id, { followers: updatedUser.followers });
+        return updatedUser;
+      }
+      return user;
+    });
     setUsers(updatedUsers);
+
+    const keyStorage = `tweets_${userId}`;
+    saveToStorage(keyStorage, isFollowing ? false : true);
   };
 
   return isLoading ? (
