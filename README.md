@@ -11,7 +11,9 @@ The goal of the project is to create tweet cards and add interactivity at the cl
 ```json
 git clone https://github.com/333Nikita333/awesome-tweets.git
 ```
+
 2. Go to project folder: `cd awesome-tweets`
+
 3. Install Dependencies: `npm install`
 
 ### Usage
