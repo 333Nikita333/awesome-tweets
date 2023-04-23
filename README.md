@@ -4,10 +4,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Awesome Tweets
 **Project Description:**<br>
-The goal of the project is to create tweet cards and add interactivity at the click of a button.
+The goal of the project is to create tweet cards and add interactivity at the click of a button. The following has also been implemented:<br>
 
 ### Installation
-1. Clone the repository: `git clone https://github.com/333Nikita333/awesome-tweets.git`
+1. Clone the repository: ```json
+git clone https://github.com/333Nikita333/awesome-tweets.git
+```
 2. Go to project folder: `cd awesome-tweets`
 3. Install Dependencies: `npm install`
 
