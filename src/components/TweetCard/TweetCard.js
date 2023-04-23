@@ -3,6 +3,7 @@ import {
   Avatar,
   AvatarBox,
   Button,
+  ButtonText,
   Card,
   FollowersNumber,
   TweetsNumber,
@@ -16,9 +17,6 @@ const TweetCard = ({ id, avatar, tweets, followers, onFollowClick }) => {
     onFollowClick(id, isFollowing);
   };
 
-  // const buttonColor = isFollowed ? '#5CD3A8' : '#EBD8FF';
-  // const buttonText = isFollowed ? 'Following' : 'Follow';
-
   return (
     <Card>
       <AvatarBox>
@@ -31,9 +29,11 @@ const TweetCard = ({ id, avatar, tweets, followers, onFollowClick }) => {
       <Button
         type='button'
         onClick={handleFollowClick}
-        style={{ backgroundColor: isFollowing ? '#5CD3A8' : '#EBD8FF' }}
+        isFollowing={isFollowing}
       >
-        {isFollowing ? 'Following' : 'Follow'}
+        <ButtonText isFollowing={isFollowing}>
+          {isFollowing ? 'Following' : 'Follow'}
+        </ButtonText>
       </Button>
     </Card>
   );

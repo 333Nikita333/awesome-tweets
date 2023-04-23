@@ -1,10 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Card = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  ${'' /* justify-content: center; */}
   align-items: center;
   padding-bottom: 36px;
   height: 100%;
@@ -76,17 +75,59 @@ export const FollowersNumber = styled.p`
   text-transform: uppercase;
 `;
 
+// const rotate180 = keyframes`
+//   from {
+//     transform: rotate(0deg);
+//   }
+//   to {
+//     transform: rotate(180deg);
+//   }
+// `;
+
 export const Button = styled.button`
+  position: relative; /* добавляем позиционирование */
   padding: 14px;
   width: 196px;
-
+  height: 50px; /* задаем фиксированную высоту */
   color: #373737;
   font-weight: 600;
   font-size: 18px;
   line-height: calc(22 / 18);
   text-transform: uppercase;
-  background-color: #ebd8ff;
   box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
   border-radius: 10.3108px;
   border-style: none;
+  background-color: ${({ isFollowing }) =>
+    isFollowing ? '#5CD3A8' : '#EBD8FF'};
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+
+  ${({ isFollowing }) =>
+    isFollowing &&
+    css`
+      transform: rotateY(180deg);
+      &::before {
+        transform: rotateY(180deg); /* поворачиваем текст */
+        transform-origin: right center; /* меняем точку поворота */
+      }
+    `}
+`;
+
+export const ButtonText = styled.span`
+  transform: ${({ isFollowing }) =>
+    isFollowing ? 'rotateY(-180deg)' : 'rotateY(0deg)'};
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+
+  &::before {
+    /* добавляем псевдоэлемент для текста */
+    content: '';
+    position: absolute; /* позиционируем элемент */
+    top: 50%; /* сдвигаем вниз на половину высоты */
+    transform: translateY(-50%); /* выравниваем по вертикали */
+    left: 50%; /* сдвигаем вправо на половину ширины */
+    transform-origin: left center; /* задаем точку поворота */
+    transform-style: preserve-3d; /* сохраняем 3D-эффект */
+    transition: transform 0.3s ease-in-out; /* добавляем анимацию поворота */
+  }
 `;
