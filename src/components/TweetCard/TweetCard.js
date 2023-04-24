@@ -11,7 +11,7 @@ import {
 } from './TweetCard.styled';
 
 const TweetCard = ({ id, avatar, tweets, followers, onFollowClick }) => {
-  const isFollowing = loadFromStorage(`tweets_${id}`) === true;
+  const isFollowing = loadFromStorage(`tweet_${id}`) === true;
 
   const handleFollowClick = () => {
     onFollowClick(id, isFollowing);
@@ -20,7 +20,7 @@ const TweetCard = ({ id, avatar, tweets, followers, onFollowClick }) => {
   return (
     <Card>
       <AvatarBox>
-        <Avatar src='/images/avatar.png' alt={avatar} />
+        <Avatar src='images/avatar.png' alt={avatar} />
       </AvatarBox>
       <UserInfoBox>
         <TweetsNumber>{tweets} tweets</TweetsNumber>

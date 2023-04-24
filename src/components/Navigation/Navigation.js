@@ -1,16 +1,24 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavList } from './Navigation.styled';
+import { AiFillHome } from 'react-icons/ai';
+import { FaUsers } from 'react-icons/fa';
 
 const Navigation = () => {
   return (
     <nav>
-      <ul>
+      <NavList>
         <li>
-          <NavLink to='/'>Home</NavLink>
+          <Link to='/'>
+            <AiFillHome />
+            Home
+          </Link>
         </li>
         <li>
-          <NavLink to='/tweets'>Tweets</NavLink>
+          <Link to='/tweets'>
+            <FaUsers />
+            Tweets
+          </Link>
         </li>
-      </ul>
+      </NavList>
     </nav>
   );
 };

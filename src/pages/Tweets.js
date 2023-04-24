@@ -1,25 +1,27 @@
 import { useEffect, useState } from 'react';
-import { saveToStorage } from 'services/storage';
+import { loadFromStorage, saveToStorage } from 'services/storage';
 import { fetchTweets, updateFollowers } from 'services/tweetsAPI';
 import BackLink from 'components/BackLink';
 import TweetsList from 'components/TweetsList';
 import ButtonLoadMore from 'components/ButtonLoadMore';
 import Loader from 'components/Loader';
+import DropDown from 'components/DropDown';
 
 const Tweets = () => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [numberVisibleUsers, setNumberVisibleUsers] = useState(3);
+  const [selectedFilter, setSelectedFilter] = useState('show all');
 
   useEffect(() => {
     setIsLoading(true);
+
     fetchTweets()
       .then(users => {
-        console.log(users);
         setUsers(users);
         setIsLoading(false);
       })
-      .catch(error => console.log('error', error.message));
+      .catch(console.log);
   }, []);
 
   const handleFollowClick = (userId, isFollowing) => {
@@ -35,24 +37,41 @@ const Tweets = () => {
       return user;
     });
     setUsers(updatedUsers);
-
-    const keyStorage = `tweets_${userId}`;
-    saveToStorage(keyStorage, isFollowing ? false : true);
+    saveToStorage(`tweet_${userId}`, isFollowing ? false : true);
   };
 
   const onBtnLoadMore = () => {
     setNumberVisibleUsers(prevVisibleUsers => prevVisibleUsers + 3);
   };
 
+  const filterUsers = (users, selectedFilter) => {
+    switch (selectedFilter) {
+      case 'show all':
+        return users;
+      case 'follow':
+        return users.filter(
+          user => loadFromStorage(`tweet_${user.id}`) !== true
+        );
+      case 'following':
+        return users.filter(
+          user => loadFromStorage(`tweet_${user.id}`) === true
+        );
+      default:
+        return users;
+    }
+  };
+
   const isBtnLoadMoreVisible = numberVisibleUsers < users.length;
-  const displayedUsers = users.slice(0, numberVisibleUsers);
+  const filteredUsers = filterUsers(users, selectedFilter);
+  const displayedUsers = filteredUsers.slice(0, numberVisibleUsers);
 
   return isLoading ? (
     <Loader />
   ) : (
     <>
       {' '}
-      <BackLink to='/'>Go back</BackLink>
+      <BackLink to='/'>Go Home</BackLink>
+      <DropDown value={selectedFilter} setSelectedFilter={setSelectedFilter} />
       <TweetsList users={displayedUsers} onFollowClick={handleFollowClick} />
       {isBtnLoadMoreVisible && <ButtonLoadMore onBtnLoadMore={onBtnLoadMore} />}
     </>

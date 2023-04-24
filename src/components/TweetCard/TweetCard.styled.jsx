@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 export const Card = styled.div`
   position: relative;
+  z-index: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,7 +10,7 @@ export const Card = styled.div`
   height: 100%;
   border-radius: 20px;
   box-shadow: -2.5777px 6.87386px 20.6216px rgba(0, 0, 0, 0.23);
-  background-image: url('/images/bgi-1.png'), url('/images/Logo-76x22.png');
+  background-image: url('images/bgi-1.png'), url('images/Logo-76x22.png');
   background-position: top 28px right 36px, top 20px left 20px;
   background-repeat: no-repeat, no-repeat;
   color: #ebd8ff;
@@ -74,15 +75,6 @@ export const FollowersNumber = styled.p`
   line-height: calc(24 / 20);
   text-transform: uppercase;
 `;
-
-// const rotate180 = keyframes`
-//   from {
-//     transform: rotate(0deg);
-//   }
-//   to {
-//     transform: rotate(180deg);
-//   }
-// `;
 
 export const Button = styled.button`
   position: relative; /* добавляем позиционирование */
