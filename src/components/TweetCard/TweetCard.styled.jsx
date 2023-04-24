@@ -8,6 +8,7 @@ export const Card = styled.div`
   align-items: center;
   padding-bottom: 36px;
   height: 100%;
+  
   border-radius: 20px;
   box-shadow: -2.5777px 6.87386px 20.6216px rgba(0, 0, 0, 0.23);
   background-image: url('images/bgi-1.png'), url('images/Logo-76x22.png');
@@ -16,13 +17,14 @@ export const Card = styled.div`
   color: #ebd8ff;
 
   &::after {
+    position: absolute;
     content: '';
     z-index: 0;
-    position: absolute;
     top: 50%;
     left: 0;
     width: 100%;
     height: 10px;
+    
     transform: translateY(-50%);
     background-color: #ebd8ff;
     box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.06),
@@ -39,6 +41,7 @@ export const AvatarBox = styled.div`
   align-items: center;
   width: 80px;
   height: 80px;
+  
   border-radius: 50%;
   background-color: #ebd8ff;
   box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.06),
@@ -46,8 +49,6 @@ export const AvatarBox = styled.div`
 `;
 
 export const Avatar = styled.img`
-  width: 62px;
-  height: 62px;
   background-color: #5736a3;
   border-radius: 50%;
 `;
@@ -77,10 +78,11 @@ export const FollowersNumber = styled.p`
 `;
 
 export const Button = styled.button`
-  position: relative; /* добавляем позиционирование */
+  position: relative;
   padding: 14px;
   width: 196px;
-  height: 50px; /* задаем фиксированную высоту */
+  height: 50px;
+  
   color: #373737;
   font-weight: 600;
   font-size: 18px;
@@ -98,8 +100,8 @@ export const Button = styled.button`
     css`
       transform: rotateY(180deg);
       &::before {
-        transform: rotateY(180deg); /* поворачиваем текст */
-        transform-origin: right center; /* меняем точку поворота */
+        transform: rotateY(180deg);
+        transform-origin: right center;
       }
     `}
 `;
@@ -112,14 +114,13 @@ export const ButtonText = styled.span`
   text-align: center;
 
   &::before {
-    /* добавляем псевдоэлемент для текста */
     content: '';
-    position: absolute; /* позиционируем элемент */
-    top: 50%; /* сдвигаем вниз на половину высоты */
-    transform: translateY(-50%); /* выравниваем по вертикали */
-    left: 50%; /* сдвигаем вправо на половину ширины */
-    transform-origin: left center; /* задаем точку поворота */
-    transform-style: preserve-3d; /* сохраняем 3D-эффект */
-    transition: transform 0.3s ease-in-out; /* добавляем анимацию поворота */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 50%;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease-in-out;
   }
 `;

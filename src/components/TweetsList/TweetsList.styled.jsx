@@ -16,9 +16,11 @@ export const List = styled.ul`
   padding: 0 0 20px 0;
   margin-top: 10px;
 `;
+
 export const Item = styled.li`
   width: 380px;
   height: 460px;
+
   border-radius: 20px;
   background: linear-gradient(
     114.99deg,

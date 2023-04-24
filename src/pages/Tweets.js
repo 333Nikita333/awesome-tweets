@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { loadFromStorage, saveToStorage } from 'services/storage';
 import { fetchTweets, updateFollowers } from 'services/tweetsAPI';
 import BackLink from 'components/BackLink';
@@ -6,6 +7,15 @@ import TweetsList from 'components/TweetsList';
 import ButtonLoadMore from 'components/ButtonLoadMore';
 import Loader from 'components/Loader';
 import DropDown from 'components/DropDown';
+
+const Section = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  flex-direction: column;
+  font-size: 18px;
+`;
 
 const Tweets = () => {
   const [users, setUsers] = useState([]);
@@ -68,13 +78,14 @@ const Tweets = () => {
   return isLoading ? (
     <Loader />
   ) : (
-    <>
+    <Section>
       {' '}
       <BackLink to='/'>Go Home</BackLink>
       <DropDown value={selectedFilter} setSelectedFilter={setSelectedFilter} />
       <TweetsList users={displayedUsers} onFollowClick={handleFollowClick} />
+      {displayedUsers.length === 0 && <p>No subscriptions</p>}
       {isBtnLoadMoreVisible && <ButtonLoadMore onBtnLoadMore={onBtnLoadMore} />}
-    </>
+    </Section>
   );
 };
 

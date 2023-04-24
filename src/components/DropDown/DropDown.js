@@ -1,3 +1,6 @@
+import PropTypes from 'prop-types';
+import { Option, Select } from './DropDown.styled';
+
 const options = [
   { value: 'show all', label: 'Show all' },
   { value: 'follow', label: 'Follow' },
@@ -5,19 +8,22 @@ const options = [
 ];
 
 const DropDown = ({ value, setSelectedFilter }) => {
-  const onChangeFilter = (e) => {
-      setSelectedFilter(e.target.value)
+  const onChangeFilter = e => {
+    setSelectedFilter(e.target.value);
   };
 
   return (
-    <select value={value} onChange={onChangeFilter}>
+    <Select value={value} onChange={onChangeFilter}>
       {options.map(option => (
-        <option key={option.value} value={option.value}>
+        <Option key={option.value} value={option.value}>
           {option.label}
-        </option>
+        </Option>
       ))}
-    </select>
+    </Select>
   );
 };
 
+DropDown.propTypes = {
+  value: PropTypes.string.isRequired,
+};
 export default DropDown;

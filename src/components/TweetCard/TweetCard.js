@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { loadFromStorage } from 'services/storage';
 import {
   Avatar,
@@ -20,7 +21,7 @@ const TweetCard = ({ id, avatar, tweets, followers, onFollowClick }) => {
   return (
     <Card>
       <AvatarBox>
-        <Avatar src='images/avatar.png' alt={avatar} />
+        <Avatar width={62} height={62} src={avatar} alt='user avatar' />
       </AvatarBox>
       <UserInfoBox>
         <TweetsNumber>{tweets} tweets</TweetsNumber>
@@ -37,6 +38,14 @@ const TweetCard = ({ id, avatar, tweets, followers, onFollowClick }) => {
       </Button>
     </Card>
   );
+};
+
+TweetCard.propTypes = {
+  id: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
+  tweets: PropTypes.number.isRequired,
+  followers: PropTypes.number.isRequired,
+  onFollowClick: PropTypes.func.isRequired,
 };
 
 export default TweetCard;

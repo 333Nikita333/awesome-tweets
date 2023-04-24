@@ -1,6 +1,6 @@
-import { Link, NavList } from './Navigation.styled';
 import { AiFillHome } from 'react-icons/ai';
 import { FaUsers } from 'react-icons/fa';
+import { Link, NavList } from './Navigation.styled';
 
 const Navigation = () => {
   return (
