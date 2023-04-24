@@ -62,7 +62,7 @@ const Tweets = () => {
         return users.filter(
           user => loadFromStorage(`tweet_${user.id}`) !== true
         );
-      case 'following':
+      case 'followings':
         return users.filter(
           user => loadFromStorage(`tweet_${user.id}`) === true
         );

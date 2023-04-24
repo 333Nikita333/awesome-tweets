@@ -4,7 +4,7 @@ import { Option, Select } from './DropDown.styled';
 const options = [
   { value: 'show all', label: 'Show all' },
   { value: 'follow', label: 'Follow' },
-  { value: 'following', label: 'Following' },
+  { value: 'followings', label: 'Followings' },
 ];
 
 const DropDown = ({ value, setSelectedFilter }) => {
