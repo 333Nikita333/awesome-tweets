@@ -7,6 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 The goal of the project is to create tweet cards and add interactivity at the click of a button. The following has also been implemented:<br>
 -A personal backend for development using the mockapi.io UI service has been created.<br>
 -Used local storage to capture the end result of user actions.<br>
+-Simple pagination implemented.<br>
 -Created a routing using React Router with two pages: Home and Tweets.<br>
 -Added dropdown filtering with three options: show all, follow and followings.
 
