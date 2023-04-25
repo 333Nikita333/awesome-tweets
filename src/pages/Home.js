@@ -10,7 +10,7 @@ const Container = styled.div`
   margin: auto;
   padding: 10px;
   max-width: 600px;
-  
+
   font-size: 35px;
   border: solid 1px #000;
   border-radius: 15px;
