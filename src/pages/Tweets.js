@@ -20,19 +20,29 @@ const Section = styled.section`
 const Tweets = () => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [numberVisibleUsers, setNumberVisibleUsers] = useState(3);
   const [selectedFilter, setSelectedFilter] = useState('show all');
+  const [page, setPage] = useState(1);
+  const [isLoadMoreVisible, setIsLoadMoreVisible] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
+    setIsLoadMoreVisible(false);
 
-    fetchTweets()
-      .then(users => {
-        setUsers(users);
+    fetchTweets(page)
+      .then(newUsers => {
+        console.log('users', newUsers);
+        setUsers(prevUsers => [...prevUsers, ...newUsers]);
         setIsLoading(false);
+        setIsLoadMoreVisible(true);
       })
       .catch(console.log);
-  }, []);
+  }, [page]);
+
+  useEffect(() => {
+    if (users.length === 12 && page !== 1) {
+      setIsLoadMoreVisible(false);
+    }
+  }, [page, users.length]);
 
   const handleFollowClick = (userId, isFollowing) => {
     const updatedUsers = users.map(user => {
@@ -51,7 +61,7 @@ const Tweets = () => {
   };
 
   const onBtnLoadMore = () => {
-    setNumberVisibleUsers(prevVisibleUsers => prevVisibleUsers + 3);
+    setPage(prevPage => prevPage + 1);
   };
 
   const filterUsers = (users, selectedFilter) => {
@@ -71,20 +81,20 @@ const Tweets = () => {
     }
   };
 
-  const isBtnLoadMoreVisible = numberVisibleUsers < users.length;
   const filteredUsers = filterUsers(users, selectedFilter);
-  const displayedUsers = filteredUsers.slice(0, numberVisibleUsers);
 
   return isLoading ? (
     <Loader />
   ) : (
     <Section>
-      {' '}
       <BackLink to='/'>Go Home</BackLink>
       <DropDown value={selectedFilter} setSelectedFilter={setSelectedFilter} />
-      <TweetsList users={displayedUsers} onFollowClick={handleFollowClick} />
-      {displayedUsers.length === 0 && <p>No subscriptions</p>}
-      {isBtnLoadMoreVisible && <ButtonLoadMore onBtnLoadMore={onBtnLoadMore} />}
+      <TweetsList users={filteredUsers} onFollowClick={handleFollowClick} />
+      {filteredUsers.length === 0 && <p>No subscriptions</p>}
+      {isLoading && filteredUsers.length && Loader(page)}
+      {isLoadMoreVisible && (
+        <ButtonLoadMore onBtnLoadMore={onBtnLoadMore} disabled={isLoading} />
+      )}
     </Section>
   );
 };
