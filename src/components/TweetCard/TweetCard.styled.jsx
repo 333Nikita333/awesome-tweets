@@ -23,7 +23,7 @@ export const Card = styled.div`
     top: 50%;
     left: 0;
     width: 100%;
-    height: 10px;
+    height: 8px;
 
     transform: translateY(-50%);
     background-color: #ebd8ff;
