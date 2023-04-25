@@ -82,19 +82,25 @@ const Tweets = () => {
 
   const filteredUsers = filterUsers(users, selectedFilter);
 
-  return isLoading ? (
-    <Loader />
-  ) : (
+  return (
     <Section>
       <BackLink to='/'>Go Home</BackLink>
-      <DropDown value={selectedFilter} setSelectedFilter={setSelectedFilter} />
-      <TweetsList users={filteredUsers} onFollowClick={handleFollowClick} />
+      {users.length > 0 && (
+        <>
+          <DropDown
+            value={selectedFilter}
+            setSelectedFilter={setSelectedFilter}
+          />
+          <TweetsList users={filteredUsers} onFollowClick={handleFollowClick} />
 
-      {filteredUsers.length === 0 && <p>List is empty</p>}
+          {filteredUsers.length === 0 && <p>List is empty</p>}
+        </>
+      )}
 
       {isLoadMoreVisible && filteredUsers.length !== 0 && (
         <ButtonLoadMore onBtnLoadMore={onBtnLoadMore} disabled={isLoading} />
       )}
+      {isLoading && <Loader />}
     </Section>
   );
 };
