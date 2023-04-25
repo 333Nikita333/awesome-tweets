@@ -30,7 +30,6 @@ const Tweets = () => {
 
     fetchTweets(page)
       .then(newUsers => {
-        console.log('users', newUsers);
         setUsers(prevUsers => [...prevUsers, ...newUsers]);
         setIsLoading(false);
         setIsLoadMoreVisible(true);
@@ -90,9 +89,10 @@ const Tweets = () => {
       <BackLink to='/'>Go Home</BackLink>
       <DropDown value={selectedFilter} setSelectedFilter={setSelectedFilter} />
       <TweetsList users={filteredUsers} onFollowClick={handleFollowClick} />
-      {filteredUsers.length === 0 && <p>No subscriptions</p>}
-      {isLoading && filteredUsers.length && Loader(page)}
-      {isLoadMoreVisible && (
+
+      {filteredUsers.length === 0 && <p>List is empty</p>}
+
+      {isLoadMoreVisible && filteredUsers.length !== 0 && (
         <ButtonLoadMore onBtnLoadMore={onBtnLoadMore} disabled={isLoading} />
       )}
     </Section>
