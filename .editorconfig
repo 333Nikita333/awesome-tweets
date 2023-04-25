@@ -1,19 +1,13 @@
-#* Файл .editorconfig - это конфигурационный файл, который используется 
-#* для определения правил форматирования кода в проекте. Это позволяет 
-#* сохранять единый стиль кодирования в проекте и обеспечивает 
-#* консистентность кода между всеми разработчиками.
-
 root = true
 
 [*]
-indent_style = space  #* Использовать пробелы для отступов вместо табуляции.
-indent_size = 2  #* Размер отступа должен быть равен 2 пробелам.
-end_of_line = lf  #* Использовать символ переноса строки LF(Line Feed) вместо 
-#* CRLF (Carriage Return + Line Feed).
-trim_trailing_whitespace = true  #* Удаление пробелов в конце строк.
-insert_final_newline = true  #* Вставка пустой строки в конце файла.
-charset = utf-8  #* Кодировка файлов должна быть в UTF-8.
+indent_style = space
+indent_size = 2
+end_of_line = lf
+
+trim_trailing_whitespace = true
+insert_final_newline = true
+charset = utf-8
 
 [*.md]
-trim_trailing_whitespace = false  #* Применяется исключение правила 
-#* "Удаление пробелов в конце строк" для файлов с расширением .md (markdown).
+trim_trailing_whitespace = false
